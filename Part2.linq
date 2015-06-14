@@ -33,7 +33,7 @@ document
 //Cannot use 'var' because it would be a string.
 //You need to use XNamespace, then string gets implicitly 
 //converted to the correct type
-XNamespace ns = "http://taeguk.co.uk/People/";	
+XNamespace ns = "http://taeguk.co.uk/People/";	//Matches the xmlns from the root element.
 document
 .Descendants(ns + "Name")		//Addition of XNamespace and string produces an XName.
 .Select(name => name.Value)
@@ -55,12 +55,11 @@ document
 
 
 //#3
-var ids = 
-	document
-	.Root
-	.Descendants(bookNs + "Name")
-	.Select(book => book.Attribute("id").Value);
-ids.Dump();
+document
+.Root
+.Descendants(bookNs + "Name")
+.Select(book => Convert.ToInt32(book.Attribute("id").Value))
+.Dump();
 
 //#3.1
 var avgRating= 
