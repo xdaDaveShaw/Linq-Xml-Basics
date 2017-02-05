@@ -62,7 +62,7 @@ document
 .Dump();
 
 //#3.1
-var avgRating= 
+var avgRating = 
 	document
 	.Root
 	.Descendants(bookNs + "Name")
@@ -71,7 +71,16 @@ var avgRating=
 avgRating.Dump();
 
 //#3.2
-avgRating= 
+avgRating =
+	document
+	.Root
+	.Descendants(bookNs + "Name")
+	.Select(book => Convert.ToInt32(book.Attribute("rating")?.Value))
+	.Average();
+avgRating.Dump();
+
+//#3.3
+avgRating = 
 	document
 	.Root
 	.Descendants(bookNs + "Name")
@@ -85,7 +94,7 @@ avgRating=
 	.Average();
 avgRating.Dump();
 
-//#3.3
+//#3.4
 avgRating = 
 	document
 	.Root
@@ -93,3 +102,4 @@ avgRating =
 	.Select(book => (Int32?)book.Attribute("rating"))
 	.Average();
 avgRating.Dump();
+
